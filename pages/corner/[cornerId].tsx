@@ -25,8 +25,8 @@ const CornerDetailsPage: NextPage = () => {
   const {corner, isLoading} = useLoadCornerDetails(id)
 
 
-  // if (isLoading) return <p>Loading...</p>
-  // if (!data || !id) return <p>No profile data</p>
+  if (isLoading) return <p>Loading...</p>
+  if (!corner || !id) return <p>No profile data</p>
 
   const chartData = [
     20,
