@@ -3,9 +3,6 @@ import {clamp} from "@/util/math";
 import {danger, primary} from "@/twind/config";
 
 type NoiseSliceProps = {
-  /**
-   * 0 to 1
-   */
   fillAmount: number,
   larger?: boolean,
   backgroundColor?: string,
@@ -35,7 +32,6 @@ export const NoiseSlice = ({
         className="w-full h-full"
         style={{
           background: `linear-gradient(to right, ${color} ${useFillAmount >= 100 ? 100 : useFillAmount - 20}%, #00000000 ${useFillAmount <= 0 ? 0: useFillAmount + 20 }%)`,
-          // background: `linear-gradient(to right, ${color} ${useFillAmount}%, #00000000 ${useFillAmount}%)`,
         }}
       />
     </div>
@@ -43,7 +39,7 @@ export const NoiseSlice = ({
 };
 
 type NoiseIndicatorProps = {
-  value: number;
+  percentage: number;
   /**
    * Cannot be 0
    */
@@ -52,7 +48,9 @@ type NoiseIndicatorProps = {
   max: number
 };
 
-export const NoiseIndicator = ({value, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
+export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
+  const value = percentage / 100;
+  console.log(value)
   const minRotation = 312; // Starting rotation angle
   const maxRotation = 48; // Ending rotation angle
   const step = (minRotation - maxRotation) / (sliceCount - 1); // Step size between slices
