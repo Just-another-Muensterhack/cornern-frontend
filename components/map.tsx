@@ -34,16 +34,15 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
 
   return (
     <MapContainer
-      center={[51.505, -0.09]}
-      zoom={13}
-      scrollWheelZoom={false}
+      center={[51.96, 7.626]}
+      zoom={14}
       style={{height: height ?? "500px", width: '100%'}}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={[51.505, -0.09]}>
+      <Marker position={[51.96, 7.626]}>
         <Popup>A pretty popup. Easily customizable.</Popup>
       </Marker>
     </MapContainer>
