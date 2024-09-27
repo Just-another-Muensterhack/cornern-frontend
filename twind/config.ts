@@ -8,6 +8,10 @@ export const primary = "#F89D15"
 export const danger = "#FF5757"
 export const background = "#232527"
 
+export const positive = "#32dc32"
+export const neutral = "#f0f01e"
+export const negative = "#dc1414"
+
 /**
  * The tailwind configuration used by the application
  */
@@ -17,7 +21,7 @@ const twindConfig = defineConfig({
       colors: {
         primary,
         danger,
-        backgroundColor: background
+        background
       },
       textDecorationThickness: {
         3: '3px',
@@ -51,7 +55,7 @@ const twindConfig = defineConfig({
       desktop: { min: '1024px' },
     },
   },
-  ignorelist: ['no-spin', /^lucide/, /^fa/, /--fa$/],
+  ignorelist: ['no-spin', /^lucide/, /^leaflet/],
   presets: [presetAutoprefix(), presetTailwind(), presetTailwindForms(), presetTypography()]
 })
 

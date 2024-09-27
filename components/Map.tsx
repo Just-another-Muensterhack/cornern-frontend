@@ -24,9 +24,20 @@ const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
   }, []);
 
   useEffect(() => {
-    if (ref.current?.clientHeight) {
-      setHeight(ref.current.clientHeight + "px")
-    }
+    const updateHeight = () => {
+      if (ref.current?.clientHeight) {
+        setHeight(ref.current.clientHeight + "px");
+      } else {
+        setTimeout(updateHeight, 100)
+      }
+    };
+
+    updateHeight();
+
+    window.addEventListener('resize', updateHeight);
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+    };
   }, [ref]);
 
   if (height === undefined) {

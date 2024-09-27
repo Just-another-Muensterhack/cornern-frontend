@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import Script from "next/script";
 import {setup} from "@twind/core";
 import twindConfig from "@/twind/config";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ['latin'],
