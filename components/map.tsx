@@ -25,7 +25,7 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
     if (ref.current?.clientHeight) {
       setHeight(ref.current.clientHeight + "px")
     }
-  }, [ref, ref.current]);
+  }, [ref.current]);
 
   if (height === undefined) {
     return (<div ref={ref} className={"h-full w-full"}/>)
@@ -37,7 +37,7 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
       center={[51.505, -0.09]}
       zoom={13}
       scrollWheelZoom={false}
-      style={{height: "500px", width: '100%'}}
+      style={{height: height ?? "500px", width: '100%'}}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
