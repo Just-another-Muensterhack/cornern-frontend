@@ -37,7 +37,6 @@ const CornerDetailedPage: NextPage = () => {
  
   if (isLoading) return <p>Loading...</p>
   if (!data || !id) return <p>No profile data</p>
-        console.log("2", data);
 
   return (
     <div className={"flex flex-col h-screen bg-black items-center p-5"}>

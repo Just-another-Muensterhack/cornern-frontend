@@ -50,7 +50,6 @@ type NoiseIndicatorProps = {
 
 export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
   const value = percentage / 100;
-  console.log(value)
   const minRotation = 312; // Starting rotation angle
   const maxRotation = 48; // Ending rotation angle
   const step = (minRotation - maxRotation) / (sliceCount - 1); // Step size between slices
