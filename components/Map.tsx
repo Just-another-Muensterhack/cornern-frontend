@@ -43,7 +43,16 @@ const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {(markers ?? []).map((value, index) => (<Marker key={index} {...value} />))}
+      {(markers ?? []).map((value, index) => (
+        <Marker
+          key={index}
+          position={value.position}
+          onClick={value.onClick}
+          iconColor={value.iconColor}
+        >
+          {value.children}
+        </Marker>
+      ))}
     </MapContainer>
   )
 };

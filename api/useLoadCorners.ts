@@ -12,7 +12,6 @@ export const useLoadCorners = (): Corner[] | undefined => {
       noiseValue: Math.random() * 60 + 20,
       name: `Corner ${index +1}`
     }))
-    console.log(corners)
     setCorners(corners)
   }, [])
 

@@ -29,5 +29,3 @@ export const Marker = ({position, iconColor, onClick = noop, children}: MarkerPr
     </LeafletMarker>
   )
 }
-
-export default Marker
