@@ -20,8 +20,13 @@ const IndexPage: NextPage = () => {
 
   const mappedData: MarkerProps[] = data.map(corner => ({
     position: corner.position,
-    onClick: () => router.push(`/corner/${corner.id}`),
-    iconColor: colorToHex(noiseValueToColor(corner.noiseValue))
+    iconColor: colorToHex(noiseValueToColor(corner.noiseValue)),
+    children: (
+      <div className={"flex flex-col gap-y-2"}>
+        <h6 className={"text-lg font-bold"}>{corner.name}</h6>
+        <button onClick={() => router.push(`/corner/${corner.id}`)}>{"Auswählen"}</button>
+      </div>
+    )
   }))
 
   return (

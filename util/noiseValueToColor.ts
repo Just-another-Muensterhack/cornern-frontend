@@ -8,9 +8,9 @@ type Color = {
 }
 
 const defaultColors: Color[] = [
-  {r: 0, g: 255, b: 0},
-  {r: 255, g: 255, b: 0},
-  {r: 255, g: 0, b: 0},
+  {r: 50, g: 220, b: 50},
+  {r: 240, g: 240, b: 30},
+  {r: 220, g: 20, b: 20},
 ]
 
 const easedColors = (color1: Color, color2: Color, combine: number): Color => {
