@@ -17,7 +17,7 @@ export type Data = {
     noise_value_week: number[],
 }
 
-const CornerDetailedPage: NextPage = () => {
+const CornerDetailsPage: NextPage = () => {
   const router = useRouter()
   const id = router.query.cornerId
 
@@ -68,4 +68,4 @@ const CornerDetailedPage: NextPage = () => {
   )
 }
 
-export default CornerDetailedPage
+export default CornerDetailsPage
