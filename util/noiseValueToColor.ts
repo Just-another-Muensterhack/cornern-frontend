@@ -18,11 +18,6 @@ const easedColors = (color1: Color, color2: Color, combine: number): Color => {
   const color2Combine = 1 - usedCombine
   const singleCombine = (n1: number, n2: number) => clamp(Math.round((n1 * usedCombine + n2 * (color2Combine))), 0, 255)
 
-  console.log(combine, usedCombine, color2Combine, {
-    r: singleCombine(color1.r, color2.r),
-    g: singleCombine(color1.g, color2.g),
-    b: singleCombine(color1.b, color2.b),
-  })
   return {
     r: singleCombine(color1.r, color2.r),
     g: singleCombine(color1.g, color2.g),
@@ -36,7 +31,7 @@ export const noiseValueToColor = (noiseValue: number) => {
   if (noiseValue < okay) {
     return easedColors(defaultColors[0], defaultColors[1], noiseValue / okay)
   }
-  return easedColors(defaultColors[1], defaultColors[2], (noiseValue - okay) / (max- okay))
+  return easedColors(defaultColors[1], defaultColors[2], (noiseValue - okay) / (max - okay))
 }
 
 export const colorToHex = (color: Color): string => {
