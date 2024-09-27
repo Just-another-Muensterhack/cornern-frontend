@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Cornern",
+  "short_name": "Cornern",
+  "lang": "de",
+  "scope": "/",
+  "start_url": "/",
+  "description": "",
+  "orientation": "portrait",
+  "categories": [],
+  "background_color": "#281c20",
+  "theme_color": "#281c20",
+  "display": "browser",
+  "display_override": ["fullscreen", "minimal-ui"],
+  "prefer_related_applications": true,
+  "related_applications": [],
+  "protocol_handlers": [],
+  "screenshots": [],
+  "shortcuts" : []
+}
