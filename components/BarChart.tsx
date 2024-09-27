@@ -23,18 +23,18 @@ type BarChartProps = {
   labels: string[]
 }
 
+export const getColor = (value: number) => {
+  if (value <= 40) {
+    return positive;
+  }
+  if (value <= 70) {
+    return neutral;
+  }
+  return negative;
+};
+
 const BarChart = ({data, labels}: BarChartProps) => {
   const average = data.reduce((sum, value) => sum + value, 0) / data.length;
-
-  const getColor = (value: number) => {
-    if (value <= 40) {
-      return positive;
-    }
-    if (value <= 70) {
-      return neutral;
-    }
-    return negative;
-  };
 
   const chartData = {
     labels: labels,
