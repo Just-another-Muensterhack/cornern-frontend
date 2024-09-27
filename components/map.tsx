@@ -25,7 +25,7 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
     if (ref.current?.clientHeight) {
       setHeight(ref.current.clientHeight + "px")
     }
-  }, [ref.current]);
+  }, [ref]);
 
   if (height === undefined) {
     return (<div ref={ref} className={"h-full w-full"}/>)
