@@ -1,13 +1,15 @@
 import {createRef, useEffect, useState} from 'react';
-import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import {MapContainer, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {Marker, MarkerProps} from "@/components/Marker";
 
 type MapComponentProps = {
   height?: string,
+  markers?: MarkerProps[]
 }
 
-const MapComponent = ({height: initialHeight}: MapComponentProps) => {
+const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
   const [height, setHeight] = useState(initialHeight)
   const ref = createRef<HTMLDivElement>()
 
@@ -30,7 +32,6 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
   if (height === undefined) {
     return (<div ref={ref} className={"h-full w-full"}/>)
   }
-  console.log(height)
 
   return (
     <MapContainer
@@ -42,11 +43,9 @@ const MapComponent = ({height: initialHeight}: MapComponentProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={[51.96, 7.626]}>
-        <Popup>A pretty popup. Easily customizable.</Popup>
-      </Marker>
+      {(markers ?? []).map((value, index) => (<Marker key={index} {...value} />))}
     </MapContainer>
-  );
+  )
 };
 
-export default MapComponent;
+export default MapComponent
