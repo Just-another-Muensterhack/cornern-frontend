@@ -3,9 +3,6 @@ import {clamp} from "@/util/math";
 import {danger, primary} from "@/twind/config";
 
 type NoiseSliceProps = {
-  /**
-   * 0 to 1
-   */
   fillAmount: number,
   larger?: boolean,
   backgroundColor?: string,
@@ -34,8 +31,7 @@ export const NoiseSlice = ({
       <div
         className="w-full h-full"
         style={{
-          background: `linear-gradient(to right, ${color} ${useFillAmount >= 100 ? 100 : useFillAmount - 20}%, #00000000 ${useFillAmount <= 0 ? 0: useFillAmount + 20 }%)`,
-          // background: `linear-gradient(to right, ${color} ${useFillAmount}%, #00000000 ${useFillAmount}%)`,
+          background: `linear-gradient(to right, ${color} ${useFillAmount >= 100 ? 100 : useFillAmount - 20}%, #00000000 ${useFillAmount <= 0 ? 0 : useFillAmount + 20}%)`,
         }}
       />
     </div>
@@ -43,7 +39,7 @@ export const NoiseSlice = ({
 };
 
 type NoiseIndicatorProps = {
-  value: number;
+  percentage: number;
   /**
    * Cannot be 0
    */
@@ -52,23 +48,18 @@ type NoiseIndicatorProps = {
   max: number
 };
 
-export const NoiseIndicator = ({value, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
+export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
+  const value = percentage / 100;
   const minRotation = 312; // Starting rotation angle
   const maxRotation = 48; // Ending rotation angle
   const step = (minRotation - maxRotation) / (sliceCount - 1); // Step size between slices
 
   const radius = 120;
 
-  const color =  value > 19/25 ? "danger" : "primary"
+  const color = value > 19 / 25 ? "danger" : "primary"
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: `${2 * radius}px`,
-        height: `${2 * radius}px`,
-      }}
-    >
+    <div className={`relative !w-[${2 * radius}px] !h-[${2 * radius}px] min-w-[${2 * radius}px] min-h-[${2 * radius}px]`}>
       {Array.from({length: sliceCount}, (_, index) => {
         const rotation = maxRotation + index * step - 180;
 
@@ -80,7 +71,7 @@ export const NoiseIndicator = ({value, sliceCount, min = 0, max}: NoiseIndicator
         const x = radius + circleRadius * Math.cos(angleInRadians);
         const y = radius + circleRadius * Math.sin(angleInRadians);
 
-        const color =  index > 19 ? danger : primary
+        const color = index > 19 ? danger : primary
         const backgroundColor = index > 19 ? "#4F2F31" : undefined
         return (
           <div
