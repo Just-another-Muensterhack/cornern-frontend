@@ -1,43 +1,32 @@
 import {NextPage} from "next";
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import {useRouter} from 'next/router'
 import {Position} from "@/components/Marker";
 import {NoiseIndicator} from "@/components/NoiseIndicator";
 import BarChart from "@/components/BarChart";
+import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 
 export type Data = {
-    id: number,
-    name: string,
-    description: string,
-    noise_value: number,
-    position: Position,
-    price_factor: number,
-    noise_value_day: number[],
-    noise_value_hour: number[],
-    noise_value_week: number[],
+  id: number,
+  name: string,
+  description: string,
+  noise_value: number,
+  position: Position,
+  price_factor: number,
+  noise_value_day: number[],
+  noise_value_hour: number[],
+  noise_value_week: number[],
 }
 
 const CornerDetailsPage: NextPage = () => {
   const router = useRouter()
-  const id = router.query.cornerId
+  const id = router.query.cornerId as string | undefined
 
 
-  const [data, setData] = useState<Data | undefined>()
-  const [isLoading, setLoading] = useState(true)
+  const {corner, isLoading} = useLoadCornerDetails(id)
 
-  useEffect(() => {
-    if(!id) return;
 
-    fetch(`http://localhost:8000/api/corner/${id}`, {"method": "GET"})
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-  }, [id])
-
-  if (isLoading) return <p>Loading...</p>
-  if (!data || !id) return <p>No profile data</p>
+  // if (isLoading) return <p>Loading...</p>
+  // if (!data || !id) return <p>No profile data</p>
 
   const chartData = [
     20,
@@ -57,13 +46,15 @@ const CornerDetailsPage: NextPage = () => {
   ]
 
   return (
-    <div className={"flex flex-col h-screen bg-black items-center p-5"}>
-      <h1 className={"text-3xl font-bold"}>{data.name}</h1>
-      <NoiseIndicator sliceCount={25} percentage={data.noise_value} max={100}/>
-      <BarChart
-        data={chartData}
-        labels={chartData.map(() => "")}
-      />
+    <div className={"flex flex-col h-screen bg-black items-center p-5 gap-y-8"}>
+      <h1 className={"text-3xl font-bold"}>{corner?.name}</h1>
+      <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
+      <div className={"w-full h-full max-w-[500px]"}>
+        <BarChart
+          data={chartData}
+          labels={chartData.map(() => "")}
+        />
+      </div>
     </div>
   )
 }
