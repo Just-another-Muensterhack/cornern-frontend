@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import {useLoadCorners} from "@/api/useLoadCorners";
 import {useRouter} from "next/router";
 import {MarkerProps} from "@/components/Marker";
+import Timebar from "@/components/Timebar";
 import {colorToHex, noiseValueToColor} from "@/util/noiseValueToColor";
 
 const DynamicMapComponent = dynamic(() => import('../components/Map'), {
