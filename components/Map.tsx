@@ -2,14 +2,16 @@ import {createRef, useEffect, useState} from 'react';
 import {MapContainer, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {Marker, MarkerProps} from "@/components/Marker";
+import {Marker, MarkerProps, Position} from "@/components/Marker";
 
 type MapComponentProps = {
   height?: string,
-  markers?: MarkerProps[]
+  markers?: MarkerProps[],
+  center: Position,
+  zoom: number
 }
 
-const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
+const MapComponent = ({height: initialHeight, markers, zoom, center}: MapComponentProps) => {
   const [height, setHeight] = useState(initialHeight)
   const ref = createRef<HTMLDivElement>()
 
@@ -46,8 +48,8 @@ const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
 
   return (
     <MapContainer
-      center={[51.96, 7.626]}
-      zoom={14}
+      center={center}
+      zoom={zoom}
       style={{height: height ?? "500px", width: '100%'}}
     >
       <TileLayer
