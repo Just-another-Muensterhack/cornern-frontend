@@ -4,16 +4,13 @@ import {tx} from "@twind/core";
 
 const PriceUpdateBar: React.FC = () => {
   const [progress, setProgress] = useState(0)
-  const [lastInterval, setLastInterval] = useState<Date>(new Date())
 
-  const {minutes, next} = useNextPriceUpdate(lastInterval)
+  const {minutes, next} = useNextPriceUpdate()
 
   useEffect(() => {
     const animate = (() => {
       const progress = 1 - (next.getTime() - Date.now()) / 1000 / 60 / minutes
-      if(progress >= 1 && lastInterval.getTime() < next.getTime()) {
-        // TODO fix reload
-        setLastInterval(new Date());
+      if(progress >= 1) {
         return
       } else {
         setProgress(progress)
@@ -24,7 +21,7 @@ const PriceUpdateBar: React.FC = () => {
     const id = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(id)
-  }, [lastInterval, minutes, next]);
+  }, [minutes, next]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -35,11 +32,11 @@ const PriceUpdateBar: React.FC = () => {
   const time = formatTime(Math.round(minutes * 60 * (1 - progress)))
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full gap-y-4">
+    <div className="flex flex-col justify-center items-center w-full gap-y-4">
       <h1 className={"text-lg font-bold"}>Nächstes Preis Update</h1>
       <div className="w-full bg-gray-200 h-9 relative rounded-full">
         <div className="rounded-full h-7 m-1 overflow-hidden">
-          <div className='flex flex-row justify-end items-center h-full bg-purple-700 rounded-full text-white pr-4' style={{width: `${ (progress) * 100}%`}}>
+          <div className={`flex flex-row justify-end items-center h-full bg-primary rounded-full text-white pr-4`} style={{width: `${ (progress) * 100}%`}}>
             <span>{progress > 0.2 && time}</span>
           </div>
         </div>

@@ -14,7 +14,7 @@ type  NextUpdate = {
   minutes: number
 }
 
-export const useNextPriceUpdate = (last: Date): NextUpdate => {
+export const useNextPriceUpdate = (): NextUpdate => {
   const [state, setState] = useState<NextUpdateJson>()
 
   const load = useCallback(async () => {
@@ -22,6 +22,9 @@ export const useNextPriceUpdate = (last: Date): NextUpdate => {
       const response = await fetch(`${BASE_URL}/api/next`, {"method": "GET"})
       const json = await response.json()
       setState(json as NextUpdateJson)
+      setTimeout(() => {
+        load()
+      }, new Date(json.timestamp).getTime() - Date.now())
     } catch (e) {
       console.error(e)
     }
@@ -29,9 +32,9 @@ export const useNextPriceUpdate = (last: Date): NextUpdate => {
 
   useEffect(() => {
     load()
-  }, [load, last]);
+  }, [load]);
 
-  if(!state) {
+  if (!state) {
     return {
       next: new Date(),
       minutes: 5

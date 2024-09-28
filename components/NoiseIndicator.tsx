@@ -96,7 +96,7 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max, size = 250
         );
       })}
       <div className={"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}>
-        <span className={`text-${color} text-4xl font-bold`}>{min + (value * (max - min))}</span>
+        <span className={`text-${color} text-4xl font-bold`}>{(min + (value * (max - min))).toFixed(1)}</span>
         <span className={"text-white/40 text-lg"}>db</span>
       </div>
     </div>
