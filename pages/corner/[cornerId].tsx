@@ -52,7 +52,7 @@ const CornerDetailsPage: NextPage = () => {
     <div className={"flex flex-col h-screen items-center p-5 gap-y-8"}>
       <div className={"flex flex-row gap-x-4 w-full justify-between items-center"}>
         <button
-          className={"flex flex-row items-center justify-center w-7 h-7 rounded-full bg-white text-black"}
+          className={"flex flex-row items-center justify-center w-[33px] h-[33px] rounded-full bg-white text-black"}
           onClick={() => {
             router.push("/")
           }}

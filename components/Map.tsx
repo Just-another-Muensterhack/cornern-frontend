@@ -53,7 +53,7 @@ const MapComponent = ({height: initialHeight, markers, zoom, center}: MapCompone
       style={{height: height ?? "500px", width: '100%'}}
     >
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       {(markers ?? []).map((value, index) => (
