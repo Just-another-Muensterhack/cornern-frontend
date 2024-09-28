@@ -4,3 +4,22 @@
 .leaflet-control-attribution {
     filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);  /* Light grey border */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;  /* Blue left border */
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
