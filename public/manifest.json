@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "Cornern",
-  "short_name": "Cornern",
+  "name": "corndex",
+  "short_name": "corndex",
   "lang": "de",
   "scope": "/",
   "start_url": "/",
