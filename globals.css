@@ -37,3 +37,7 @@
     background: linear-gradient(135deg, #e86464, #efbf64);
 }
 
+.ReactModal__Overlay {
+    background: rgba(50, 50, 50, 0.7) !important;
+}
+

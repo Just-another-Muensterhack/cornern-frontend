@@ -24,7 +24,10 @@ const twindConfig = defineConfig({
       colors: {
         primary,
         danger,
-        background
+        background,
+        positive,
+        neutral,
+        negative
       },
       textDecorationThickness: {
         3: '3px',
