@@ -1,23 +1,24 @@
 import {useCallback, useEffect, useState} from "react";
-import {Data} from "@/pages/corner/[cornerId]";
+import { CornerDetails, BASE_URL } from "./types";
 
 export const useLoadCornerDetails = (id?: string) => {
-  const [state, setState] = useState<Data>()
+  const [state, setState] = useState<CornerDetails>()
 
   const load = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/corner/${id}`, {"method": "GET"})
+      const response = await fetch(`${BASE_URL}/api/corner/${id}`, {"method": "GET"})
       const json = await response.json()
-      setState(json as Data)
+
+      setState(json as CornerDetails)
     } catch (e) {
       console.error(e)
     }
   }, [id])
 
   useEffect(() => {
-    if(id !== undefined){
+    if (id !== undefined){
       load().then();
-    }else {
+    } else {
       setState(undefined)
     }
   }, [id, load]);

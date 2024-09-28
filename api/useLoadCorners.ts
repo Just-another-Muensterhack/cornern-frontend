@@ -1,19 +1,22 @@
 import {Corner} from "@/api/types";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import { BASE_URL } from "./types";
 
 export const useLoadCorners = (): Corner[] | undefined => {
   const [corners, setCorners] = useState<Corner[]>()
 
-  useEffect(() => {
-    // TODO api request here
-    const corners: Corner[] = new Array(40).fill(0).map((_, index) => ({
-      id: index.toString(),
-      position: [51.96 + Math.random() * 0.06 - 0.03, 7.626 + Math.random() * 0.06 - 0.03],
-      noiseValue: Math.random() * 60 + 20,
-      name: `Corner ${index +1}`
-    }))
-    setCorners(corners)
+  const load = useCallback(async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/corner`, {"method": "GET"})
+      const json = await response.json()
+
+      setCorners(json as Corner[])
+    } catch (e) {
+      console.error(e)
+    }
   }, [])
+
+  useEffect(() => { load() }, [load]);
 
   return corners
 }
