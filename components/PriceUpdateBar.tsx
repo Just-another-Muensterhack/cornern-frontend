@@ -37,10 +37,10 @@ const PriceUpdateBar: React.FC = () => {
       <div className="w-full bg-gray-200 h-9 relative rounded-full">
         <div className="rounded-full h-7 m-1 overflow-hidden">
           <div className={`flex flex-row justify-end items-center h-full bg-primary rounded-full text-white pr-4`} style={{width: `${ (progress) * 100}%`}}>
-            <span>{progress > 0.2 && time}</span>
+            <span className={"text-lg font-helvetica"}>{progress > 0.2 && time}</span>
           </div>
         </div>
-        <div className={tx("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-black ", {"opacity-0" : progress > 0.2})}>
+        <div className={tx("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-black font-helvetica", {"opacity-0" : progress > 0.2})}>
           {time}
         </div>
       </div>

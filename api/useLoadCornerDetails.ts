@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import { CornerDetails, BASE_URL } from "./types";
+import {CornerDetails, BASE_URL} from "./types";
 
 export const useLoadCornerDetails = (id?: string) => {
   const [state, setState] = useState<CornerDetails>()
@@ -16,15 +16,13 @@ export const useLoadCornerDetails = (id?: string) => {
   }, [id])
 
   useEffect(() => {
-    if (id !== undefined){
+    if (id !== undefined) {
       const interval = setInterval(() => load(), 1000)
       return () => clearInterval(interval)
     } else {
       setState(undefined)
     }
   }, [id, load]);
-
-  console.log("updated")
 
   return {
     isLoading: state === undefined,

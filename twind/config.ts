@@ -1,4 +1,4 @@
-import { defineConfig } from '@twind/core'
+import {defineConfig} from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 import presetTailwindForms from '@twind/preset-tailwind-forms'
@@ -18,6 +18,9 @@ export const negative = "#dc1414"
 const twindConfig = defineConfig({
   theme: {
     extend: {
+      fontFamily: {
+        helvetica: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+      },
       colors: {
         primary,
         danger,
@@ -50,9 +53,9 @@ const twindConfig = defineConfig({
         min: '480px',
         max: '768px'
       },
-      mobile: { max: '768px' },
-      tablet: { min: '768px', max: '1024px' },
-      desktop: { min: '1024px' },
+      mobile: {max: '768px'},
+      tablet: {min: '768px', max: '1024px'},
+      desktop: {min: '1024px'},
     },
   },
   ignorelist: ['no-spin', /^lucide/, /^leaflet/],
