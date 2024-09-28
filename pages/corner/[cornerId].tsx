@@ -37,7 +37,9 @@ const CornerDetailsPage: NextPage = () => {
         <h1 className={"text-3xl font-bold"}>{corner?.name}</h1>
         <div className={"w-7 h-7 min-w-[28px]"}/>
       </div>
-      <PriceUpdateBar/>
+      <div className={"max-w-[500px] w-full"}>
+          <PriceUpdateBar/>
+      </div>
       <div className={"flex flex-row items-center justify-center gap-x-2"}>
         <span className={"text-lg"}>Preis Faktor:</span>
         <span>

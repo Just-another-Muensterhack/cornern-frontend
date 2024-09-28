@@ -27,7 +27,7 @@ function MyApp({
   return (
     <>
       <Head>
-        <title>{"corndex"}</title>
+        <title>{"Corndex - Bier bei Stille, beste Promille"}</title>
         <style>{`
         :root {
           --font-inter: ${inter.style.fontFamily};

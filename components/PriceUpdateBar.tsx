@@ -33,7 +33,7 @@ const PriceUpdateBar: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full gap-y-4">
-      <h1 className={"text-lg font-bold"}>Nächstes Preis Update</h1>
+      <h1 className={"text-lg font-bold"}>Nächster Corndex in</h1>
       <div className="w-full bg-gray-200 h-9 relative rounded-full">
         <div className="rounded-full h-7 m-1 overflow-hidden">
           <div className={`flex flex-row justify-end items-center h-full bg-primary rounded-full text-white pr-4`} style={{width: `${ (progress) * 100}%`}}>
