@@ -26,7 +26,8 @@ const IndexPage: NextPage = () => {
         <h6 className={"text-lg font-bold"}>{corner.name}</h6>
         <button onClick={() => router.push(`/corner/${corner.id}`)}>{"Auswählen"}</button>
       </div>
-    )
+    ),
+    priceFactor: 1.7
   }))
 
   return (

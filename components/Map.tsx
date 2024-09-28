@@ -60,6 +60,7 @@ const MapComponent = ({height: initialHeight, markers}: MapComponentProps) => {
           position={value.position}
           onClick={value.onClick}
           iconColor={value.iconColor}
+          priceFactor={value.priceFactor}
         >
           {value.children}
         </Marker>

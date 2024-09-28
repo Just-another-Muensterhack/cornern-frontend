@@ -34,6 +34,15 @@ export const noiseValueToColor = (noiseValue: number) => {
   return easedColors(defaultColors[1], defaultColors[2], (noiseValue - okay) / (max - okay))
 }
 
+export const priceFactorToColor = (priceFactor: number) => {
+  const okay = 1
+  const max = 2
+  if (priceFactor < okay) {
+    return easedColors(defaultColors[0], defaultColors[1], priceFactor / okay)
+  }
+  return easedColors(defaultColors[1], defaultColors[2], (priceFactor - okay) / (max - okay))
+}
+
 export const colorToHex = (color: Color): string => {
   const toString = (value: number) => value.toString(16).padStart(2, "0")
   return `#${toString(color.r)}${toString(color.g)}${toString(color.b)}`
