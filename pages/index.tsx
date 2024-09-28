@@ -53,7 +53,7 @@ const IndexPage: NextPage = () => {
         width={150}
         height={30}
       />
-      <div className={"relative flex flex-col h-screen bg-black"}>
+      <div className={"relative flex flex-col h-screen"}>
         <DynamicMapComponent
           center={[51.95145364769459, 7.638705915143061]}
           zoom={16}
