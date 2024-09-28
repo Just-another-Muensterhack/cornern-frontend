@@ -2,8 +2,8 @@
     display: none;
 }
 
-.leaflet-container {
-    filter: brightness(.9);
+.leaflet-popup-close-button {
+    display: none;
 }
 
 .spinner {

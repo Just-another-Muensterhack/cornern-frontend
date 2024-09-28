@@ -6,7 +6,7 @@ import presetTypography from '@twind/preset-typography'
 
 export const primary = "#F89D15"
 export const danger = "#FF5757"
-export const background = "#232527"
+export const background = "#111111"
 
 export const positive = "#32dc32"
 export const neutral = "#f0f01e"
