@@ -5,7 +5,7 @@ import PriceUpdateBar from "@/components/PriceUpdateBar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {BASE_URL, Meassurement} from "@/api/types";
-import {Angry, ChevronLeft, Frown, Meh, Smile, Share2} from "lucide-react";
+import {ChevronLeft, Frown, Meh, Smile, Share2} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Infobox from "@/components/Infobox";
 import {tw, tx} from "@twind/core";
