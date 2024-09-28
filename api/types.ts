@@ -3,9 +3,9 @@ import {Position} from "@/components/Marker";
 export type Corner = {
   id: string,
   name: string,
-  noiseValue: number,
+  noise_value: number,
   position: Position,
-  priceFactor: number,
+  price_factor: number,
 }
 
 export type Meassurement = {
