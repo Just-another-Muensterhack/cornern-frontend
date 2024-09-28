@@ -11,17 +11,18 @@ export type MarkerProps = PropsWithChildren<{
    * Color in hex
    */
   iconColor?: string,
+  priceFactor: number,
   onClick?: () => void
 }>
 
-export const Marker = ({position, iconColor, onClick = noop, children}: MarkerProps) => {
+export const Marker = ({position, iconColor, onClick = noop, children, priceFactor}: MarkerProps) => {
   return (
     <LeafletMarker
       position={position}
       eventHandlers={{
         click: onClick
       }}
-      icon={MarkerIcon({color: iconColor})}
+      icon={MarkerIcon({color: iconColor, scaleFactor: priceFactor})}
     >
       <Popup>
         {children}

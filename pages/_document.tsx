@@ -14,6 +14,7 @@ class MyDocument extends Document {
           <meta property="og:site_name" content="Cornern" />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="de_DE" />
+          <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"/>
         </Head>
         <body>
         <Main />
