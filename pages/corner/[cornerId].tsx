@@ -1,7 +1,7 @@
 import {NextPage} from "next";
 import {useRouter} from 'next/router'
 import {NoiseIndicator} from "@/components/NoiseIndicator";
-import Timebar from "@/components/Timebar";
+import PriceUpdateBar from "@/components/PriceUpdateBar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
@@ -23,7 +23,7 @@ const CornerDetailsPage: NextPage = () => {
 
   return (
     <div className={"flex flex-col h-screen bg-black items-center p-5 gap-y-8"}>
-      <div className={"flex flex-row gap-x-4 w-full justify-between"}>
+      <div className={"flex flex-row gap-x-4 w-full justify-between items-center"}>
         <button
           className={"flex flex-row items-center justify-center w-7 h-7 rounded-full bg-white text-black"}
           onClick={() => {
@@ -35,7 +35,7 @@ const CornerDetailsPage: NextPage = () => {
         <h1 className={"text-3xl font-bold"}>{corner?.name}</h1>
         <div className={"w-7 h-7 min-w-[28px]"}/>
       </div>
-      <Timebar/>
+      <PriceUpdateBar/>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
       <div className={"w-full h-full max-w-[500px]"}>
         <BarChart
