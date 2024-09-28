@@ -22,7 +22,7 @@ const CornerDetailsPage: NextPage = () => {
   const [histogramTab, setHistogramTab] = useState<HistogramTab>("hour")
   const [isShowingShare, setIsShowingShare] = useState(false)
   const {corner, isLoading} = useLoadCornerDetails(id)
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isShowingFeedBack, setIsShowingFeedBack] = useState(false);
 
   if (isLoading) return <LoadingSpinner/>
   if (!corner) return <LoadingSpinner/>
@@ -52,23 +52,10 @@ const CornerDetailsPage: NextPage = () => {
     chartDataLabels = corner.noise_value_week.map((value) => daysOfWeek[new Date(value.timestamp).getDay()])
   }
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function sendFeedback(rating: number){
+  function sendFeedback(rating: number) {
     console.log("feedback sent " + rating)
     fetch(`${BASE_URL}/api/feedback`, {method: "POST", body: JSON.stringify({corner: id, loudness: rating})})
-    closeModal()
+    setIsShowingFeedBack(false)
   }
 
 
@@ -117,35 +104,34 @@ const CornerDetailsPage: NextPage = () => {
           labels={chartDataLabels}
         />
       </div>
-      <button className={"flex flex-row gap-x-4 bg-[#636366] hover:bg-[#777777] py-2 px-4 rounded-md"}
+      <button className={"max-w-[500px] w-full flex flex-row justify-center gap-x-4 bg-[#636366] hover:bg-[#777777] py-3 px-4 rounded-md"}
               onClick={() => setIsShowingShare(true)}>
         <Share2/>
         Teilen
       </button>
-      <button className="max-w-[500px] w-full rounded-lg gap-x-1 bg-[#38393D] hover:bg-[#777777] text-white mb-4 p-4" onClick={openModal}>
+      <button className="max-w-[500px] w-full rounded-lg gap-x-1 bg-[#636366] hover:bg-[#777777] text-white mb-4 py-3 px-4"
+              onClick={() => setIsShowingFeedBack(true)}>
         Feedback geben
       </button>
 
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        className="fixed bottom-0 left-0 w-full bg-background"
-        contentLabel="Example Modal"
+        isOpen={isShowingFeedBack}
+        onCloseClick={() => setIsShowingFeedBack(false)}
+        onBackgroundClick={() => setIsShowingFeedBack(false)}
+        id="feedbackModal"
+        modalClassName={"!bg-background !text-white"}
+        titleText={"Feedback"}
       >
-        <div className="flex flex-col items-center p-5 gap-y-8 text-white sticky bottom-0 h-auto">
-          <span className={"text-lg"}>Feedback:</span>
-          <div className="flex flex-row items-center justify-center gap-x-2">
-            <button onClick={() => sendFeedback(3)}>
-              <Smile size={32}></Smile>
-            </button>
-            <button onClick={() => sendFeedback(2)}>
-              <Meh size={32}></Meh>
-            </button>
-            <button onClick={() => sendFeedback(1)}>
-              <Frown size={32}></Frown>
-            </button>
-          </div>
+        <div className="flex flex-row justify-around items-center gap-x-2 min-h-[100px] px-4 w-full">
+          <button onClick={() => sendFeedback(1)}>
+            <Frown size={32} className={"text-negative hover:opacity-80"}/>
+          </button>
+          <button onClick={() => sendFeedback(2)}>
+            <Meh size={32} className={"text-neutral hover:opacity-80"}/>
+          </button>
+          <button onClick={() => sendFeedback(3)} >
+            <Smile size={32} className={"text-positive hover:opacity-80"}/>
+          </button>
         </div>
       </Modal>
       <Modal id={"shareModal"} isOpen={isShowingShare} onBackgroundClick={() => setIsShowingShare(false)}>

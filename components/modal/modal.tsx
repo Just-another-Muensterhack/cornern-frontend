@@ -23,8 +23,8 @@ export const ModalHeader = ({
                               descriptionText = ''
                             }: ModalHeaderProps) => {
   return (
-    <div className={tw('flex flex-col')}>
-      <div className={tw('flex flex-row justify-between items-start gap-x-8')}>
+    <div className={tw('flex flex-col items-center')}>
+      <div className={tw('flex flex-row justify-between items-center gap-x-8')}>
         {title ?? (
           <span className={tx("text-lg font-bold", {
             'mb-1': description || descriptionText,
