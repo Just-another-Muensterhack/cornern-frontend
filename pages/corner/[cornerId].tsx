@@ -7,6 +7,7 @@ import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
 import {ChevronLeft} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import Infobox from "@/components/Infobox";
 import {tw, tx} from "@twind/core";
 import {colorToHex, priceFactorToColor} from "@/util/noiseValueToColor";
 import {useState} from "react";
@@ -75,6 +76,7 @@ const CornerDetailsPage: NextPage = () => {
         </span>
       </div>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
+      <Infobox dbValue={corner?.noise_value ?? 0}/>
       <div className={"w-full h-full max-w-[500px]"}>
         <div className={"grid grid-cols-3 p-1 w-full rounded-lg gap-x-1 bg-[#38393D] text-white mb-4"}>
           <button className={tx("hover:bg-[#777777] rounded-lg py-1", {"bg-[#636366]": histogramTab === "hour"})}
