@@ -45,21 +45,23 @@ type NoiseIndicatorProps = {
    */
   sliceCount: number;
   min?: number,
-  max: number
+  max: number,
+  size?: number
 };
 
-export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndicatorProps) => {
+export const NoiseIndicator = ({percentage, sliceCount, min = 0, max, size = 250}: NoiseIndicatorProps) => {
   const value = percentage / 100;
   const minRotation = 312; // Starting rotation angle
   const maxRotation = 48; // Ending rotation angle
   const step = (minRotation - maxRotation) / (sliceCount - 1); // Step size between slices
 
-  const radius = 120;
+  const radius = size / 2;
 
   const color = value > 19 / 25 ? "danger" : "primary"
 
   return (
-    <div className={`relative !w-[${2 * radius}px] !h-[${2 * radius}px] min-w-[${2 * radius}px] min-h-[${2 * radius}px]`}>
+    <div
+      className={`relative !w-[${2 * radius}px] !h-[${2 * radius}px] min-w-[${2 * radius}px] min-h-[${2 * radius}px]`}>
       {Array.from({length: sliceCount}, (_, index) => {
         const rotation = maxRotation + index * step - 180;
 
@@ -67,7 +69,7 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndi
         const fillValue = (value - index / sliceCount) * sliceCount
         const isSelected = fillValue <= 1 && fillValue >= 0
 
-        const circleRadius = radius - (isSelected ? 24 : 30)
+        const circleRadius = radius - (isSelected ? 18 : 24)
         const x = radius + circleRadius * Math.cos(angleInRadians);
         const y = radius + circleRadius * Math.sin(angleInRadians);
 
@@ -76,10 +78,11 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndi
         return (
           <div
             key={index}
-            className={"absolute -translate-x-1/2 -translate-y-1/2"}
+            className={`absolute -translate-x-1/2 -translate-y-1/2`}
             style={{
               left: x,
-              top: y
+              top: y,
+              opacity: clamp(40 + index * 10, 0, 100) / 100
             }}
           >
             <NoiseSlice
@@ -93,8 +96,8 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max}: NoiseIndi
         );
       })}
       <div className={"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}>
-        <span className={`text-${color} text-2xl font-bold`}>{min + (value * (max - min))}</span>
-        <span className={"text-white/40"}>db</span>
+        <span className={`text-${color} text-4xl font-bold`}>{min + (value * (max - min))}</span>
+        <span className={"text-white/40 text-lg"}>db</span>
       </div>
     </div>
   );

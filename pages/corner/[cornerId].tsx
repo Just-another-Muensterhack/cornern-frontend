@@ -4,7 +4,7 @@ import {NoiseIndicator} from "@/components/NoiseIndicator";
 import Timebar from "@/components/Timebar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
-import { Meassurement } from "@/api/types";
+import {Meassurement} from "@/api/types";
 
 
 const CornerDetailsPage: NextPage = () => {
@@ -22,8 +22,8 @@ const CornerDetailsPage: NextPage = () => {
   return (
     <div className={"flex flex-col h-screen bg-black items-center p-5 gap-y-8"}>
       <h1 className={"text-3xl font-bold"}>{corner?.name}</h1>
+      <Timebar/>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
-      <Timebar />
       <div className={"w-full h-full max-w-[500px]"}>
         <BarChart
           data={chartData}
