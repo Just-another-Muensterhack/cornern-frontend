@@ -17,7 +17,8 @@ export const useLoadCorners = (): Corner[] | undefined => {
     }
   }, [])
 
-  useEffect(() => { load() }, [load]);
+  useEffect(() => { const interval = setInterval(() => load(), 1000)
+    return () => clearInterval(interval) }, [load]);
 
   return corners
 }
