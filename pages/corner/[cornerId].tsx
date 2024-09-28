@@ -4,7 +4,7 @@ import {NoiseIndicator} from "@/components/NoiseIndicator";
 import PriceUpdateBar from "@/components/PriceUpdateBar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
-import {Meassurement} from "@/api/types";
+import {BASE_URL, Meassurement} from "@/api/types";
 import {Angry, ChevronLeft, Frown, Meh, Smile} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Infobox from "@/components/Infobox";
@@ -64,6 +64,12 @@ const CornerDetailsPage: NextPage = () => {
     setIsOpen(false);
   }
 
+  function sendFeedback(rating: number){
+    console.log("feedback sent " + rating)
+    fetch(`${BASE_URL}/api/feedback`, {method: "POST", body: JSON.stringify({corner: id, loudness: rating})})
+    closeModal()
+  }
+
 
   return (
     <div className={"flex flex-col h-full items-center p-5 gap-y-8"}>
@@ -118,19 +124,19 @@ const CornerDetailsPage: NextPage = () => {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        className="bg-background"
+        className="fixed bottom-0 left-0 w-full bg-background"
         contentLabel="Example Modal"
       >
         <div className="flex flex-col items-center p-5 gap-y-8 text-white sticky bottom-0 h-auto">
           <span className={"text-lg"}>Feedback:</span>
           <div className="flex flex-row items-center justify-center gap-x-2">
-            <button>
+            <button onClick={() => sendFeedback(3)}>
               <Smile size={32}></Smile>
             </button>
-            <button>
+            <button onClick={() => sendFeedback(2)}>
               <Meh size={32}></Meh>
             </button>
-            <button>
+            <button onClick={() => sendFeedback(1)}>
               <Frown size={32}></Frown>
             </button>
           </div>          
