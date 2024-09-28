@@ -7,6 +7,8 @@ import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
 import {ChevronLeft} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import {tw} from "@twind/core";
+import {colorToHex, priceFactorToColor} from "@/util/noiseValueToColor";
 
 
 const CornerDetailsPage: NextPage = () => {
@@ -36,6 +38,15 @@ const CornerDetailsPage: NextPage = () => {
         <div className={"w-7 h-7 min-w-[28px]"}/>
       </div>
       <PriceUpdateBar/>
+      <div className={"flex flex-row items-center justify-center gap-x-2"}>
+        <span className={"text-lg"}>Preis Faktor:</span>
+        <span>
+          x
+          <span className={tw(`text-[${colorToHex(priceFactorToColor(corner.price_factor))}] font-bold text-xl`)}>
+             {corner.price_factor.toFixed(1)}
+          </span>
+        </span>
+      </div>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
       <div className={"w-full h-full max-w-[500px]"}>
         <BarChart

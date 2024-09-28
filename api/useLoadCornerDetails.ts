@@ -17,11 +17,14 @@ export const useLoadCornerDetails = (id?: string) => {
 
   useEffect(() => {
     if (id !== undefined){
-      load().then();
+      const interval = setInterval(() => load(), 1000)
+      return () => clearInterval(interval)
     } else {
       setState(undefined)
     }
   }, [id, load]);
+
+  console.log("updated")
 
   return {
     isLoading: state === undefined,
