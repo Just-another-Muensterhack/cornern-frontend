@@ -10,7 +10,6 @@ export const useLoadCorners = (): Corner[] | undefined => {
       const response = await fetch(`${BASE_URL}/api/corner`, {"method": "GET"})
       const json = await response.json()
 
-      console.log(json)
       setCorners(json as Corner[])
     } catch (e) {
       console.error(e)
