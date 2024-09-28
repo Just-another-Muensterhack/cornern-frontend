@@ -1,21 +1,21 @@
 import React from 'react';
-import {noiseValueToColor, colorToHex} from '@/util/noiseValueToColor';
 import {Info} from 'lucide-react';
 import {tx} from "@twind/core";
+import {decibelToColor, decibelToNoiseState} from "@/util/noiseCalc";
 
 type DbIndicatorProps = {
-  dbValue: number;
+  db: number;
   className?: string
 };
 
-const Infobox: React.FC<DbIndicatorProps> = ({dbValue, className}) => {
-  const color = colorToHex(noiseValueToColor(dbValue));
-  const dbTextThreshold = 40; // Threshold for the text to change
-  const isAboveThreshold = dbValue > dbTextThreshold
+const Infobox = ({db, className}: DbIndicatorProps) => {
+  const color = decibelToColor(db);
+  const isAboveThreshold = decibelToNoiseState(db) !== "silent"
+
   return (
     <div
       className={tx("flex flex-col w-full gap-x-4 rounded-lg px-4 pt-2 pb-3 text-white", {
-        "!text-black": dbValue < 60,
+        "!text-black": decibelToNoiseState(db) !== "loud",
       }, className)}
       style={{backgroundColor: color}}
     >
