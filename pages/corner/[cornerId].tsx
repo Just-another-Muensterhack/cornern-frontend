@@ -53,7 +53,7 @@ const CornerDetailsPage: NextPage = () => {
     <div className={"flex flex-col h-screen items-center p-5 gap-y-8"}>
       <div className={"flex flex-row gap-x-4 w-full justify-between items-center"}>
         <button
-          className={"flex flex-row items-center justify-center w-[33px] h-[33px] rounded-full bg-white text-black"}
+          className={"flex flex-row items-center justify-center min-w-[28px] w-7 h-7 rounded-full bg-white text-black"}
           onClick={() => {
             router.push("/")
           }}
@@ -76,7 +76,7 @@ const CornerDetailsPage: NextPage = () => {
         </span>
       </div>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
-      <Infobox dbValue={corner?.noise_value ?? 0}/>
+      <Infobox dbValue={corner?.noise_value ?? 0} className={"max-w-[500px]"}/>
       <div className={"w-full h-full max-w-[500px]"}>
         <div className={"grid grid-cols-3 p-1 w-full rounded-lg gap-x-1 bg-[#38393D] text-white mb-4"}>
           <button className={tx("hover:bg-[#777777] rounded-lg py-1", {"bg-[#636366]": histogramTab === "hour"})}
