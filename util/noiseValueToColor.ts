@@ -16,7 +16,7 @@ const defaultColors: Color[] = [
 const easedColors = (color1: Color, color2: Color, combine: number): Color => {
   const usedCombine = EaseFunctions.easeInEaseOut(combine)
   const color2Combine = 1 - usedCombine
-  const singleCombine = (n1: number, n2: number) => clamp(Math.round((n1 * usedCombine + n2 * (color2Combine))), 0, 255)
+  const singleCombine = (n1: number, n2: number) => clamp(Math.round((n1 * color2Combine + n2 * (usedCombine))), 0, 255)
 
   return {
     r: singleCombine(color1.r, color2.r),
@@ -35,10 +35,20 @@ export const noiseValueToColor = (noiseValue: number) => {
 }
 
 export const priceFactorToColor = (priceFactor: number) => {
-  const okay = 1
+  const min = 0.7
+  const okay = 1.3
   const max = 2
+  /*
+  if(priceFactor < okay) {
+    return defaultColors[0]
+  }
+  if(priceFactor === okay) {
+    return defaultColors[1]
+  }
+  return defaultColors[2]
+  */
   if (priceFactor < okay) {
-    return easedColors(defaultColors[0], defaultColors[1], priceFactor / okay)
+    return easedColors(defaultColors[0], defaultColors[1], (priceFactor - min) / (okay - min))
   }
   return easedColors(defaultColors[1], defaultColors[2], (priceFactor - okay) / (max - okay))
 }
