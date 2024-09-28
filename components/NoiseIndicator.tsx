@@ -1,6 +1,7 @@
 import React from 'react';
 import {clamp} from "@/util/math";
 import {danger, primary} from "@/twind/config";
+import {decibelToNoiseState} from "@/util/noiseCalc";
 
 type NoiseSliceProps = {
   fillAmount: number,
@@ -39,26 +40,24 @@ export const NoiseSlice = ({
 };
 
 type NoiseIndicatorProps = {
-  percentage: number;
+  db: number;
   /**
    * Cannot be 0
    */
   sliceCount: number;
-  min?: number,
-  max: number,
   size?: number
 };
 
-export const NoiseIndicator = ({percentage, sliceCount, min = 0, max, size = 250}: NoiseIndicatorProps) => {
-  const value = percentage / 100;
+export const NoiseIndicator = ({db, sliceCount, size = 250}: NoiseIndicatorProps) => {
+  const percentage = clamp(db / 100, 0, 1);
   const minRotation = 312; // Starting rotation angle
   const maxRotation = 48; // Ending rotation angle
   const step = (minRotation - maxRotation) / (sliceCount - 1); // Step size between slices
 
   const radius = size / 2;
 
-  const color = value > 19 / 25 ? "danger" : "primary"
-
+  const noiseState = decibelToNoiseState(db)
+  const color = noiseState === "loud" ? danger : primary
   return (
     <div
       className={`relative !w-[${2 * radius}px] !h-[${2 * radius}px] min-w-[${2 * radius}px] min-h-[${2 * radius}px]`}>
@@ -66,15 +65,19 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max, size = 250
         const rotation = maxRotation + index * step - 180;
 
         const angleInRadians = ((rotation - 90) * Math.PI) / 180; // Convert degrees to radians
-        const fillValue = (value - index / sliceCount) * sliceCount
-        const isSelected = fillValue <= 1 && fillValue >= 0
+        const fillValue = (percentage - index / sliceCount) * sliceCount
+        const isSelected = (fillValue < 1 && fillValue > 0)
+          || (fillValue === 0 && index === 0)
+          || (fillValue === 1 && index === sliceCount - 1)
 
         const circleRadius = radius - (isSelected ? 18 : 24)
         const x = radius + circleRadius * Math.cos(angleInRadians);
         const y = radius + circleRadius * Math.sin(angleInRadians);
 
-        const color = index > 19 ? danger : primary
-        const backgroundColor = index > 19 ? "#4F2F31" : undefined
+        const sliceDbValue = (index) * (100 / sliceCount)
+        const sliceNoiseState = decibelToNoiseState(sliceDbValue)
+        const sliceColor = sliceNoiseState === "loud" ? danger : primary
+        const backgroundColor = sliceNoiseState === "loud" ? "#4F2F31" : undefined
         return (
           <div
             key={index}
@@ -90,13 +93,14 @@ export const NoiseIndicator = ({percentage, sliceCount, min = 0, max, size = 250
               larger={isSelected}
               rotation={rotation}
               backgroundColor={backgroundColor}
-              color={color}
+              color={sliceColor}
             />
           </div>
         );
       })}
       <div className={"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}>
-        <span className={`text-${color} text-4xl font-bold`}>{(min + (value * (max - min))).toFixed(1)}</span>
+        <span
+          className={`text-${color} text-4xl font-bold font-helvetica`}>{db.toFixed(1)}</span>
         <span className={"text-white/40 text-lg"}>db</span>
       </div>
     </div>

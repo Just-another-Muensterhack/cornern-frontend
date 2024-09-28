@@ -6,6 +6,10 @@
     display: none;
 }
 
+.leaflet-layer {
+    filter: brightness(1.2);
+}
+
 .spinner {
     border: 4px solid rgba(150, 150, 150, 1); /* Light grey border */
     width: 36px;

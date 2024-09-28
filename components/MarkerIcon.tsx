@@ -13,7 +13,7 @@ export const MarkerIcon = ({color = "red", scaleFactor}: MarkerIconProps) => {
     <path fill="${color}" d="M20 0C31.05 0 40 8.95 40 20S20 52 20 52 0 31.05 0 20 8.95 0 20 0z"/>
     <circle cx="20" cy="20" r="15" fill="white"/>
   </svg>
-  <div class="absolute text-[${color}] font-bold text-center top-[11px] w-full font-mono" style="filter: brightness(0.5)">
+  <div class="absolute text-[${color}] font-bold text-center top-[11px] w-full font-helvetica" style="filter: brightness(0.5)">
     ${scaleFactor.toFixed(1)}
   </div>
 </div>`,
