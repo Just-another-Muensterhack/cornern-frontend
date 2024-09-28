@@ -7,6 +7,7 @@ import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
 import {ChevronLeft} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import Infobox from "@/components/Infobox";
 
 
 const CornerDetailsPage: NextPage = () => {
@@ -37,6 +38,7 @@ const CornerDetailsPage: NextPage = () => {
       </div>
       <Timebar/>
       <NoiseIndicator sliceCount={25} percentage={corner?.noise_value ?? 0} max={100}/>
+      <Infobox dbValue={corner?.noise_value ?? 0}/>
       <div className={"w-full h-full max-w-[500px]"}>
         <BarChart
           data={chartData}

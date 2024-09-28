@@ -19,7 +19,7 @@ const Timebar: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-full w-full">
-      <h1>Nächstes Preis Update</h1>
+      <h1>Nächster Corndex in</h1>
       <div className="w-3/4 bg-gray-200 h-9 relative rounded-full">
         <div
           className="rounded-full h-7 m-1 overflow-hidden"
