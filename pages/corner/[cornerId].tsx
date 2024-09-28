@@ -5,12 +5,13 @@ import PriceUpdateBar from "@/components/PriceUpdateBar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
-import {ChevronLeft} from "lucide-react";
+import {Angry, ChevronLeft, Frown, Meh, Smile} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Infobox from "@/components/Infobox";
 import {tw, tx} from "@twind/core";
 import {colorToHex, priceFactorToColor} from "@/util/noiseValueToColor";
 import {useState} from "react";
+import Modal from 'react-modal';
 
 type HistogramTab = "hour" | "day" | "week"
 
@@ -20,6 +21,7 @@ const CornerDetailsPage: NextPage = () => {
   const [histogramTab, setHistogramTab] = useState<HistogramTab>("hour")
 
   const {corner, isLoading} = useLoadCornerDetails(id)
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   if (isLoading) return <LoadingSpinner/>
   if (!corner) return <LoadingSpinner/>
@@ -48,6 +50,20 @@ const CornerDetailsPage: NextPage = () => {
     chartData = corner.noise_value_week.map((measurement: Meassurement) => measurement.value)
     chartDataLabels = corner.noise_value_week.map((value) => daysOfWeek[new Date(value.timestamp).getDay()])
   }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
 
   return (
     <div className={"flex flex-col h-full items-center p-5 gap-y-8"}>
@@ -94,6 +110,32 @@ const CornerDetailsPage: NextPage = () => {
           labels={chartDataLabels}
         />
       </div>
+      <button className="max-w-[500px] w-full rounded-lg gap-x-1 bg-[#38393D] hover:bg-[#777777] text-white mb-4 p-4" onClick={openModal}>
+        Feedback geben
+      </button>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        className="bg-background"
+        contentLabel="Example Modal"
+      >
+        <div className="flex flex-col items-center p-5 gap-y-8 text-white sticky bottom-0 h-auto">
+          <span className={"text-lg"}>Feedback:</span>
+          <div className="flex flex-row items-center justify-center gap-x-2">
+            <button>
+              <Smile size={32}></Smile>
+            </button>
+            <button>
+              <Meh size={32}></Meh>
+            </button>
+            <button>
+              <Frown size={32}></Frown>
+            </button>
+          </div>          
+        </div>
+      </Modal>
     </div>
   )
 }
