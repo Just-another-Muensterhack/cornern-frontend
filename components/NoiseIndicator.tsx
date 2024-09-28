@@ -31,7 +31,7 @@ export const NoiseSlice = ({
       <div
         className="w-full h-full"
         style={{
-          background: `linear-gradient(to right, ${color} ${useFillAmount >= 100 ? 100 : useFillAmount - 20}%, #00000000 ${useFillAmount <= 0 ? 0 : useFillAmount + 20}%)`,
+          background: `linear-gradient(to right, ${color} ${useFillAmount >= 100 ? 100 : useFillAmount - 10}%, #00000000 ${useFillAmount <= 0 ? 0 : useFillAmount + 10}%)`,
         }}
       />
     </div>
