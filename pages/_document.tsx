@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <meta name="og:title" property="og:title" content="corndex" />
           <meta name="description" content="corndex" />
           <meta property="og:description" content="corndex" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.png" />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
           <meta property="og:site_name" content="corndex" />
