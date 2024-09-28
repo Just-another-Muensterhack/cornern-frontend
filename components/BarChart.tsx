@@ -98,8 +98,8 @@ const BarChart = ({data, labels}: BarChartProps) => {
               if (value === 70) {
                 return "1.3"
               }
-              if (value === 80) {
-                return "1.6"
+              if (value === 85) {
+                return "1.7"
               }
               if (value === 100) {
                 return "2.0"
