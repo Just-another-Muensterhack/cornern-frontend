@@ -27,7 +27,7 @@ function MyApp({
   return (
     <>
       <Head>
-        <title>{"Corndex"}</title>
+        <title>{"corndex"}</title>
         <style>{`
         :root {
           --font-inter: ${inter.style.fontFamily};
