@@ -5,12 +5,14 @@ import PriceUpdateBar from "@/components/PriceUpdateBar";
 import BarChart from "@/components/BarChart";
 import {useLoadCornerDetails} from "@/api/useLoadCornerDetails";
 import {Meassurement} from "@/api/types";
-import {ChevronLeft} from "lucide-react";
+import {ChevronLeft, Share2} from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Infobox from "@/components/Infobox";
 import {tw, tx} from "@twind/core";
 import {priceFactorToColor} from "@/util/priceFactorToColor";
 import {useState} from "react";
+import {Modal} from "@/components/modal/modal";
+import QRCode from "react-qr-code";
 
 type HistogramTab = "hour" | "day" | "week"
 
@@ -18,9 +20,8 @@ const CornerDetailsPage: NextPage = () => {
   const router = useRouter()
   const id = router.query.cornerId as string | undefined
   const [histogramTab, setHistogramTab] = useState<HistogramTab>("hour")
-
+  const [isShowingShare, setIsShowingShare] = useState(false)
   const {corner, isLoading} = useLoadCornerDetails(id)
-
   if (isLoading) return <LoadingSpinner/>
   if (!corner) return <LoadingSpinner/>
 
@@ -94,6 +95,14 @@ const CornerDetailsPage: NextPage = () => {
           labels={chartDataLabels}
         />
       </div>
+      <button className={"flex flex-row gap-x-4 bg-[#636366] hover:bg-[#777777] py-2 px-4 rounded-md"}
+              onClick={() => setIsShowingShare(true)}>
+        <Share2/>
+        Teilen
+      </button>
+      <Modal id={"shareModal"} isOpen={isShowingShare} onBackgroundClick={() => setIsShowingShare(false)}>
+        <QRCode value={window.location.toString()}/>
+      </Modal>
     </div>
   )
 }

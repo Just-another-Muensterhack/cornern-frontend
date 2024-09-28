@@ -5,6 +5,8 @@ import Script from "next/script";
 import {setup} from "@twind/core";
 import twindConfig from "@/twind/config";
 import "../globals.css";
+import {modalRootName} from "@/components/modal/modal";
+import {ModalRegister} from "@/components/modal/modalContext";
 
 setup(twindConfig)
 
@@ -20,9 +22,11 @@ function MyApp({
       <Script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
               integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
               crossOrigin=""></Script>
-      <div className={"bg-background text-white"}>
-        <Component {...pageProps} />
-      </div>
+      <ModalRegister>
+        <div className={"bg-background text-white"} id={modalRootName}>
+          <Component {...pageProps} />
+        </div>
+      </ModalRegister>
     </>
   )
 }
